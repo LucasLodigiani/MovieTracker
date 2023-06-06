@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieTrackerAPI", "MovieTrackerAPI\MovieTrackerAPI.csproj", "{CA10B6EC-31E3-4722-8A82-7959453E9EC3}"
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "frontend-web", "frontend-web\frontend-web.esproj", "{EC6B3EB0-D5A5-4D24-A113-D5BAB9531CFF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,12 @@ Global
 		{CA10B6EC-31E3-4722-8A82-7959453E9EC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA10B6EC-31E3-4722-8A82-7959453E9EC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA10B6EC-31E3-4722-8A82-7959453E9EC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC6B3EB0-D5A5-4D24-A113-D5BAB9531CFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC6B3EB0-D5A5-4D24-A113-D5BAB9531CFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC6B3EB0-D5A5-4D24-A113-D5BAB9531CFF}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{EC6B3EB0-D5A5-4D24-A113-D5BAB9531CFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC6B3EB0-D5A5-4D24-A113-D5BAB9531CFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC6B3EB0-D5A5-4D24-A113-D5BAB9531CFF}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
