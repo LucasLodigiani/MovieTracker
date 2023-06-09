@@ -1,14 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Main from './components/Main';
+import Movie from './components/Movie/Movie'
+import { UserProvider } from './contexts/UserContext';
 
-function App() {
+//Legacy code
+/*<Route path="/Users" element={User.IsInRole("Admin") ? <Users/> : <Navigate to={"/Login"} replace />}/>*/
+
+const App = () => {
   return (
-    <div>
-      <h1 className="text-3xl font-bold underline">
-        Hello world!
-      </h1>
-    </div>
+    //TO DO: Agregar las rutas privadas.
+    <Router>
+      <UserProvider>
+        <Routes>
+          <Route path="/Movie/:id?" element={<Movie />} />
+          <Route path="/" element={<Main />} />
+        </Routes>
+      </UserProvider>
+    </Router>
   );
-}
+};
+
+
+
 
 export default App;
