@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import backgroundImage from '../../assets/images/movies-background.jpg';
+import useAuth from '../../hooks/useAuth';
 
 
 //TO DO: Modularizar todo este componente.
 const Register = () => {
+  //Deconstruir la funcion
+  const { Register } = useAuth();
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -25,14 +28,11 @@ const Register = () => {
     setCheckbox(event.target.checked)
   };
 
-  const handleRegister = (event) => {
+  const HandleRegister = async (event) => {
     event.preventDefault();
 
-    // Enviar datos a la api.
-
-    console.log('Username:', username);
-    console.log('Email:', email);
-    console.log('Password:', password);
+    await Register({username,email,password});
+    
 
   };
 
@@ -96,7 +96,7 @@ const Register = () => {
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             type="submit"
-            onClick={handleRegister}
+            onClick={HandleRegister}
           >
             Registrar
           </button>

@@ -1,5 +1,6 @@
-import { useContext } from 'react';
-import UserContext from '../contexts/UserContext';
+import { useContext, useEffect } from 'react';
+import { UserContext } from '../contexts/UserContext';
+import { base_url } from '../utils/Config';
 
 const useAuth = () => {
   const { user, setUser } = useContext(UserContext);
@@ -17,8 +18,24 @@ const useAuth = () => {
     //Loguear usuario
   };
 
-  const Register = () => {
+  const Register = async (userData) => {
     //Registrar usuario
+    console.log(userData);
+    const response = await fetch(base_url + "/api/Users/Register", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData),
+    });
+
+    if (response.ok) {
+      // Registro exitoso
+      console.log("El registro ha sido exitoso!" + response.json)
+    } else {
+      // Error al registrar usuario
+      console.log("Ha ocurrido algun error..." + response.json);
+    }
   };
 
   const Logout = () => {

@@ -100,10 +100,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors();
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+
+app.UseAuthentication();
+//app.UseAuthorization();
 
 app.MapControllers();
 
