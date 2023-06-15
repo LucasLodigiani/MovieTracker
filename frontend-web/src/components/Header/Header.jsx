@@ -3,16 +3,22 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
-    <header className="fixed top-0 left-0 right-0 z-10 bg-slate-900 shadow-md px-4 py-2">
+    <header className="sticky top-0 top-0 left-0 right-0 z-10 shadow-md px-5 py-2 bg-gradient-to-r from-blue-900 to-indigo-900 ">
       <div className="flex items-center justify-between">
-        <Link to="/" className="text-xl font-bold text-white hover:text-gray-300">
-          MovieTracker
-        </Link>
+        <div className="flex items-center justify-start">
+          <Link to="/" className="text-xl font-bold text-white hover:text-sky-600 mr-5">
+            MovieTracker
+          </Link>
+          <Link to="/movies" className="rounded-md  hover:text-sky-500	 px-5 ">
+            Movies
+          </Link>
+        </div>
+        <div className="flex items-center justify-between text-blue-gray-900"></div>
         <div>
-          <Link to="/Login" className="text-white hover:text-gray-300 mr-4">
+          <Link to="/login" className="rounded-md  hover:text-sky-500	 px-5 ">
             Iniciar Sesión
           </Link>
-          <Link to="/Register" className="text-white hover:text-gray-300">
+          <Link to="/register" className="rounded-md  hover:text-sky-500	hover:text-gray-300 px-5 ">
             Registrar
           </Link>
         </div>

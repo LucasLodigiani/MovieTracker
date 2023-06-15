@@ -1,10 +1,12 @@
-import React from 'react'
+import React from 'react';
 
 const Main = () => {
   return (
-    <div>
+    <div className="">
+      {/* Content of the main section */}
     </div>
-  )
-}
+   
+  );
+};
 
-export default Main
+export default Main;

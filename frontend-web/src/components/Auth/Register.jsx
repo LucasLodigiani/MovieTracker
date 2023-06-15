@@ -44,7 +44,7 @@ const Register = () => {
         backgroundSize: 'cover',
       }}
     >
-      <form className="bg-slate-900 shadow-md px-10 py-8 w-96">
+      <form className="bg-gradient-to-r from-blue-900 to-indigo-900 shadow-md px-10 py-8 w-96">
         <h1 className="text-white text-4xl font-bold mb-2">Crea una cuenta</h1>
         <div className="mb-8">
           <label className="text-white text-sm font-bold mb-2" htmlFor="username">
