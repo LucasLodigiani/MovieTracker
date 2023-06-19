@@ -63,5 +63,22 @@ namespace MovieTrackerAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+
+        [HttpGet]
+        [Route("GetAllUsers")]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            var users = await _userService.GetAllUsers();
+
+            if(users == null)
+            {
+                return NoContent();
+            }
+            else
+            {
+                return Ok(users);
+            }
+            
+        }
     }
 }

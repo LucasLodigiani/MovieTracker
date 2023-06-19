@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using MovieTrackerAPI.Data;
 using MovieTrackerAPI.Models;
+using MovieTrackerAPI.Models.DTOs;
 using MovieTrackerAPI.Models.Entities;
 using MovieTrackerAPI.Services.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
@@ -13,11 +16,13 @@ namespace MovieTrackerAPI.Services.Implementations
     {
         private readonly UserManager<User> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
+        private readonly ApplicationDbContext _context;
         private readonly IConfiguration _configuration;
-        public UserService(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
+        public UserService(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration, ApplicationDbContext context)
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
+            this._context = context;
             _configuration = configuration;
 
         }
@@ -108,6 +113,23 @@ namespace MovieTrackerAPI.Services.Implementations
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        public async Task<IEnumerable<UserDto>> GetAllUsers()
+        {
+            List<UserDto> users = await _context.Users
+            .Join(_context.UserRoles, u => u.Id, ur => ur.UserId, (u, ur) => new { User = u, UserRole = ur })
+            .Join(_context.Roles, ur => ur.UserRole.RoleId, r => r.Id, (ur, r) => new { User = ur.User, Role = r })
+            .Select(ur => new UserDto
+            {
+                Id = ur.User.Id,
+                UserName = ur.User.UserName,
+                Email = ur.User.Email,
+                Role = ur.Role.Name
+            })
+            .ToListAsync();
+
+            return users;
         }
     }
 }
