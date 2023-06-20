@@ -14,13 +14,20 @@ const useAuth = () => {
     //Si los roles son diferentes se genera un nuevo jwt con los roles actualizados para el usuario.
   }
 
-  const Login = () => {
+  const Login = async (userData) => {
     //Loguear usuario
+    const response = await fetch(base_url + "/api/Users/Login", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData),
+    });
+    console.log(response.text)
   };
 
   const Register = async (userData) => {
     //Registrar usuario
-    console.log(userData);
     const response = await fetch(base_url + "/api/Users/Register", {
       method: 'POST',
       headers: {
@@ -29,13 +36,7 @@ const useAuth = () => {
       body: JSON.stringify(userData),
     });
 
-    if (response.ok) {
-      // Registro exitoso
-      console.log("El registro ha sido exitoso!" + response.json)
-    } else {
-      // Error al registrar usuario
-      console.log("Ha ocurrido algun error..." + response.json);
-    }
+    return response;
   };
 
   const Logout = () => {

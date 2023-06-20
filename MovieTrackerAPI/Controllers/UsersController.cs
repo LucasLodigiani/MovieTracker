@@ -47,6 +47,10 @@ namespace MovieTrackerAPI.Controllers
         {
             try
             {
+                for(long i = 0; i < 999999999; i++)
+                {
+
+                }
                 if (!ModelState.IsValid)
                     return BadRequest("Invalid payload");
                 var (status, message) = await _userService.Register(model, UserRoles.User);

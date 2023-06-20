@@ -7,6 +7,8 @@ import useAuth from '../../hooks/useAuth';
 const Register = () => {
   //Deconstruir la funcion
   const { Register } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState("");
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -30,10 +32,19 @@ const Register = () => {
 
   const HandleRegister = async (event) => {
     event.preventDefault();
+    setMessage(null);
+    setIsLoading(true);
+    const result = await Register({username,email,password});
+    setIsLoading(false);
+    if (result.ok) {
+      // Registro exitoso
+      setMessage("El registro ha sido exitoso!")
 
-    await Register({username,email,password});
-    
+    } else {
+      // Error al registrar usuario
+      setMessage("Ha ocurrido algun error...");
 
+    }
   };
 
   return (
@@ -44,7 +55,7 @@ const Register = () => {
         backgroundSize: 'cover',
       }}
     >
-      <form className="bg-gradient-to-r from-blue-900 to-indigo-900 shadow-md px-10 py-8 w-96">
+      <form className="bg-slate-900 shadow-md px-10 py-8 w-96">
         <h1 className="text-white text-4xl font-bold mb-2">Crea una cuenta</h1>
         <div className="mb-8">
           <label className="text-white text-sm font-bold mb-2" htmlFor="username">
@@ -93,14 +104,25 @@ const Register = () => {
           <p className="text-white inline-block align-middle">Acepto los términos y condiciones</p>
         </div>
         <div className="flex items-center justify-center">
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            type="submit"
-            onClick={HandleRegister}
-          >
-            Registrar
-          </button>
+          {isLoading ? (
+            <button
+              className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+              type="submit"
+              disabled
+            >
+              Cargando...
+            </button>
+          ) : (
+            <button
+              className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              type="submit"
+              onClick={HandleRegister}
+            >
+              Registrar
+            </button>
+          )}
         </div>
+        {message && <p className='text-center'>{message}</p>}
       </form>
     </div>
   );
