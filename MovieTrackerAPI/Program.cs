@@ -24,7 +24,7 @@ builder.Services.AddTransient<IUserService, UserService>();
 
 builder.Services.AddSwaggerGen(options =>
 {
-    options.SwaggerDoc("v1", new OpenApiInfo { Title = "Chat", Version = "v1" });
+    options.SwaggerDoc("v1", new OpenApiInfo { Title = "MovieTracker", Version = "v2" });
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description = @"Autorización JWT Header utilizando el esquema Bearer. Ingresa Bearer [espacio] y el token jwt,
@@ -51,13 +51,21 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 var _GetConnectionString = builder.Configuration.GetConnectionString("MovieTrackerDB");
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(_GetConnectionString));
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(_GetConnectionString));
 
 
 builder.Services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Password.RequireDigit = true;
+    options.Password.RequiredLength = 5;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+});
 
 // Adding Authentication  
 builder.Services.AddAuthentication(options =>
@@ -106,7 +114,7 @@ app.UseHttpsRedirection();
 
 
 app.UseAuthentication();
-//app.UseAuthorization();
+app.UseAuthorization();
 
 app.MapControllers();
 

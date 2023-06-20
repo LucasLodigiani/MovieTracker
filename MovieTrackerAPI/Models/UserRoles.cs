@@ -6,7 +6,7 @@
 
         public const string Mod = "Mod";
 
-        public const string Usuario = "Usuario";
+        public const string User = "User";
     }
 
 }
