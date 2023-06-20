@@ -131,5 +131,16 @@ namespace MovieTrackerAPI.Services.Implementations
 
             return users;
         }
+
+        public async Task<(int, string)> DeleteUser(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return (0,"Not found");
+            }
+            await userManager.DeleteAsync(user);
+            return (1, "User deleted");
+        }
     }
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import Offcanvas from './Offcanvas';
 
 const Main = () => {
   return (
