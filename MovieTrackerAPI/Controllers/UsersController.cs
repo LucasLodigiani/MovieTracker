@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MovieTrackerAPI.Models;
 using MovieTrackerAPI.Services.Interfaces;
@@ -65,6 +66,7 @@ namespace MovieTrackerAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [Route("GetAllUsers")]
         public async Task<IActionResult> GetAllUsers()
         {

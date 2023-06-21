@@ -15,9 +15,10 @@ const Header = () => {
           </Link>
           <span className='rounded-md  hover:text-sky-500'>
             <Modal title="Panel de Usuarios">
-                <Users/>
+                  <Users/>
             </Modal>
           </span>
+          
         </div>
         <div className="flex items-center justify-between text-blue-gray-900"></div>
         <div>

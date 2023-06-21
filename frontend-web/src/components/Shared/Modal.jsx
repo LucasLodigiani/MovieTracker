@@ -13,9 +13,9 @@ const Modal = ({ title, children }) => {
 
   return (
     <div>
-      <p className='cursor-pointer' onClick={openModal}>
+      <button className='' onClick={openModal}>
         {title}
-      </p>
+      </button>
 
       {isOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
