@@ -24,8 +24,9 @@ const Modal = ({ title, children }) => {
             <h2 className="text-lg font-bold mb-2 text-black text-center">{title}</h2>
             <hr></hr>
             {children}
+            <hr></hr>
             <button
-              className="mt-4 bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="mt-4 bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded float-right"
               onClick={closeModal}
             >
               Cerrar

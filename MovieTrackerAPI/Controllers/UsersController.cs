@@ -66,7 +66,6 @@ namespace MovieTrackerAPI.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         [Route("GetAllUsers")]
         public async Task<IActionResult> GetAllUsers()
         {

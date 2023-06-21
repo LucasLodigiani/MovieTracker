@@ -35,7 +35,7 @@ namespace MovieTrackerAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] MovieDto movieDto)
+        public async Task<IActionResult> Create([MovieDto movieDto)
         {
             Movie movie = new Movie
             {

@@ -8,6 +8,8 @@ namespace MovieTrackerAPI.Models.DTOs
         public Guid? Id { get; set; }
         public string Title { get; set; }
 
+        //public IFormFile image { get; set; }
+
         public ICollection<Category> Categories { get; set; }
     }
 }

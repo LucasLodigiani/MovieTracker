@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Modal from '../Shared/Modal';
 import Users from '../Users/Users';
+import CreateMovie from '../Movie/CreateMovie';
 const Header = () => {
   return (
     <header className="sticky top-0 left-0 right-0 z-10 shadow-md px-5 py-2 bg-gradient-to-r from-blue-900 to-indigo-900 ">
@@ -16,6 +17,11 @@ const Header = () => {
           <span className='rounded-md  hover:text-sky-500'>
             <Modal title="Panel de Usuarios">
                   <Users/>
+            </Modal>
+          </span>
+          <span className='rounded-md  hover:text-sky-500'>
+            <Modal title="Create Movie">
+                  <CreateMovie/>
             </Modal>
           </span>
           
