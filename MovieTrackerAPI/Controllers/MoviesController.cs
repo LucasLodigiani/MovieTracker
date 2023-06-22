@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using MovieTrackerAPI.Data;
 using MovieTrackerAPI.Models.DTOs;
 using MovieTrackerAPI.Models.Entities;
+using MovieTrackerAPI.Services.Interfaces;
 using System.Linq;
 
 namespace MovieTrackerAPI.Controllers
@@ -13,9 +14,11 @@ namespace MovieTrackerAPI.Controllers
     public class MoviesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        public MoviesController(ApplicationDbContext context)
+        private readonly IMovieService _movieService;
+        public MoviesController(ApplicationDbContext context, IMovieService movieService )
         {
             _context = context;
+            _movieService = movieService;
         }
 
         [HttpGet]
@@ -27,7 +30,9 @@ namespace MovieTrackerAPI.Controllers
                 {
                     Id = m.Id,
                     Title = m.Title,
-                    Categories = m.Categories
+                    Categories = m.Categories,
+                    ImageUrl = m.ImageUrl,
+                    
                 })
                 .ToListAsync();
 
@@ -35,18 +40,19 @@ namespace MovieTrackerAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([MovieDto movieDto)
+        public async Task<IActionResult> Create([FromForm] MovieDto movieDto)
         {
-            Movie movie = new Movie
-            {
-                Id = Guid.NewGuid(),
-                Title = movieDto.Title,
-                Categories = movieDto.Categories,
-            };
 
-            await _context.Movies.AddAsync(movie);
-            await _context.SaveChangesAsync();
-            return Ok(movie);
+            var (status, result) = await _movieService.CreateMovie(movieDto);
+            if(status == 1)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest(result);
+            }
+
 
         }
 
@@ -70,5 +76,7 @@ namespace MovieTrackerAPI.Controllers
             }
             
         }
+        
+        
     }
 }
