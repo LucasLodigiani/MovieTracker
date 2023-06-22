@@ -13,7 +13,7 @@ import Header from './components/Header/Header';
 const App = () => {
   return (
     //TO DO: Agregar las rutas privadas.
-    <div className="bg-dark">
+    <div>
       <Router>
         <UserProvider>
           <Header/>

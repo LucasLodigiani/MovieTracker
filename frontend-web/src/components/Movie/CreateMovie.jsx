@@ -1,39 +1,19 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import { base_url } from '../../utils/Config';
+import useCreateMovie from '../../hooks/movies/useCreateMovie';
+import ButtonLoading from '../Shared/ButtonLoading';
+import useGetCategories from '../../hooks/categories/useGetCategories';
 
 const CreateMovie = () => {
-    const [categoriesData, setCategoriesData] = useState([]);
+    const [createdMovie, isCreatingMovie, isCreatingMovieError, createMovie] = useCreateMovie();
+    const [categoriesData, isCategoriesLoading, isCategoriesLoadingError] = useGetCategories();
+
     const [title, setTitle] = useState("");
     const [categories, setCategories] = useState("");
     const [image, setImage] = useState();
     const [preview, setPreview] = useState();
 
-
-    useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const response = await fetch(base_url + '/api/Categories/GetAllCategories', {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-            });
-    
-            if (response.ok) {
-              const jsonData = await response.json();
-              setCategoriesData(jsonData);
-              console.log(jsonData)
-            } else {
-              console.log('Error al obtener las categorias:', response.status);
-            }
-          } catch (error) {
-            console.log('Error al obtener las categorias:', error);
-          }
-        };
-    
-        fetchData();
-      }, []);
       
       const handleTitleChange = (event) => {
         setTitle(event.target.value);
@@ -45,6 +25,7 @@ const CreateMovie = () => {
       
       const handleImageChange = (event) => {
         setImage(event.target.files[0]);
+        
         // Mostrar vista previa de la imagen seleccionada
         const reader = new FileReader();
         reader.onload = () => {
@@ -56,9 +37,9 @@ const CreateMovie = () => {
 
       const handleSubmit = async (event) => {
         event.preventDefault();
-        
-        //Itera por cada una para ponerle la propiedad name que se envia en el json.
+        const formData = new FormData();
         const splitedCategories = categories.split(",");
+        
         //Poner los nombres dentro de cada objeto
         const categoryArray = splitedCategories.map((cn) => {
             return {
@@ -67,7 +48,7 @@ const CreateMovie = () => {
             };
           });
 
-        const formData = new FormData();
+
         formData.append('Title', title);
         formData.append('Image', image);
 
@@ -76,31 +57,34 @@ const CreateMovie = () => {
           formData.append(`Categories[${index}].name`, category.name);
         });
 
-        const response = await fetch(base_url + "/api/Movies/", {
-          method: 'POST',
-          body: formData,
-        });
-
-        if(response.ok){
-            console.log("Pelicula creada con exito...");
-        }
-
+        //Api call
+        await createMovie(formData);        
 
       }
+      
+
   return (
-    <form onSubmit={handleSubmit} className='text-blue-950' encType="multipart/form-data">
+    <form className='text-blue-950' encType="multipart/form-data">
         <label>Titulo: </label>
         <input type='text' className='border border-slate-800 rounded-sm' onChange={handleTitleChange} value={title}></input>
-        <p className='text-black bg-slate-400'>Categorias(en bd): <span>[{categoriesData.map((c) => c.name).join(', ')}]</span></p>
+        <p className='text-gray-600 '>Categorias(en bd): 
+            {isCategoriesLoading && <span>Cargando...</span>}
+            {categoriesData !== null ? <span className='text-cyan-400'>{categoriesData.map((c) => c.name).join(', ')}</span> : null}
+            {isCategoriesLoadingError && <span className='bg-red-300'>Error al obtener las categorias:{isCategoriesLoadingError}</span>}
+        </p>
+
         <label>Categorias(separadas por ","): </label>
         <input type='text' className='border border-slate-800 rounded-sm' onChange={handleCategoriesChange} value={categories}></input>
+        <br></br>
         <label>Portada: </label>
         <input type="file" onChange={handleImageChange} />
         {preview && (
-        <img src={preview} alt="Preview" style={{ width: '200px', height: '200px' }} />
-      )}
+        <img src={preview} alt="Preview" style={{ width: '150px', height: '200px' }} />
+        )}
+        {isCreatingMovieError && <p className='bg-red-400'>Error al crear la pelicula: {isCreatingMovieError}</p>}
+        {createdMovie && <p>Pelicula creada con exito: {createdMovie}</p>} 
         <br></br>
-        <button type='submit' className='mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded'>Crear</button>
+        <ButtonLoading isLoading={isCreatingMovie} onClick={handleSubmit} buttonText={"Crear"} ></ButtonLoading>
     </form>
   )
 }
