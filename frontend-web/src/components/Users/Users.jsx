@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { base_url } from '../../utils/Config';
 import Alert from '../Shared/Alert';
+import Modal from '../Shared/Modal';
+import DeleteUser from './DeleteUser';
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -30,9 +32,11 @@ const Users = () => {
         {u.role === "Admin" || u.role === "Mod" ? <p className='bg-red-600 text-white rounded px-2'>{u.role}</p> : <p className='bg-blue-400 text-white rounded px-2'>{u.role}</p>}
         <p className='text-black font-semibold'>{u.userName}</p>
         <p>{u.email}</p>
-        <div className='ml-auto'>
+        <div className='ml-auto inline-flex'>
             <button className='bg-blue-500 hover:bg-blue-700 text-white px-2 rounded'>Editar</button>
-            <button className='bg-red-500 hover:bg-red-700 text-white px-2 rounded'>Eliminar</button>
+            <Modal title="Eliminar" buttonStyle="bg-red-500 hover:bg-red-700 text-white px-2 rounded ">
+              <DeleteUser user={u}></DeleteUser>
+            </Modal>
         </div>
         
     </Alert>);

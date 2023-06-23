@@ -11,10 +11,10 @@ const Header = () => {
           <Link to="/" className="text-xl font-bold text-white hover:text-sky-600 mr-5">
             MovieTracker
           </Link>
-          <Link to="/movies" className="rounded-md  hover:text-sky-500	 px-5 ">
+          {/* <Link to="/movies" className="rounded-md  hover:text-sky-500	 px-5 ">
             Movies
-          </Link>
-          <span className='rounded-md  hover:text-sky-500'>
+          </Link>*/}
+          <span className='rounded-md  hover:text-sky-500 px-5'>
             <Modal title="Panel de Usuarios">
                   <Users/>
             </Modal>

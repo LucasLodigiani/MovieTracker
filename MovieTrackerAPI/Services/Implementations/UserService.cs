@@ -75,26 +75,6 @@ namespace MovieTrackerAPI.Services.Implementations
             return (1, token);
         }
 
-        //public async Task<bool> DeleteUser(string id)
-        //{
-        //    var user = await userManager.FindByIdAsync(id);
-        //    if (user == null)
-        //    {
-        //        return false;
-        //    }
-
-        //    var result = await userManager.DeleteAsync(user);
-
-        //    if (result.Succeeded)
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
-
 
         private string GenerateToken(IEnumerable<Claim> claims)
         {

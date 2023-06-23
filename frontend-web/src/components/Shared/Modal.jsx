@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Modal = ({ title, children }) => {
+const Modal = ({ title, buttonStyle,children }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
@@ -13,7 +13,7 @@ const Modal = ({ title, children }) => {
 
   return (
     <div>
-      <button className='' onClick={openModal}>
+      <button className={buttonStyle} onClick={openModal}>
         {title}
       </button>
 
