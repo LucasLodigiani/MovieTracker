@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Modal from '../Shared/Modal';
 import Users from '../Users/Users';
 import CreateMovie from '../Movie/CreateMovie';
+import {BiSolidUserDetail} from "react-icons/bi"
 const Header = () => {
   return (
     <header className="sticky top-0 left-0 right-0 z-10 shadow-md px-5 py-2 bg-gradient-to-r from-blue-900 to-indigo-900 ">

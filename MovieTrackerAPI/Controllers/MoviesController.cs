@@ -39,6 +39,28 @@ namespace MovieTrackerAPI.Controllers
             return Ok(movieDtos);
         }
 
+        [HttpGet("id")]
+        public async Task<IActionResult> GetMovie(Guid Id)
+        {
+            try
+            {
+                var movieDto = await _movieService.GetMovieById(Id);
+
+                if (movieDto == null)
+                {
+                    return NotFound();
+                }
+                return Ok(movieDto);
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+            
+        } 
+
+
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] MovieDto movieDto)
         {

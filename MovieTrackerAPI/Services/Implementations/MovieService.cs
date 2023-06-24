@@ -1,4 +1,5 @@
-﻿using MovieTrackerAPI.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using MovieTrackerAPI.Data;
 using MovieTrackerAPI.Models.DTOs;
 using MovieTrackerAPI.Models.Entities;
 using MovieTrackerAPI.Services.Interfaces;
@@ -81,5 +82,18 @@ namespace MovieTrackerAPI.Services.Implementations
             return uniqueFileName;
         }
 
+        public async Task<MovieDto?> GetMovieById(Guid Id)
+        {
+            MovieDto? movie = await _context.Movies.Include(c => c.Categories).Where(m => m.Id == Id).Select(m => new MovieDto
+            {
+                Id = m.Id,
+                Title = m.Title,
+                ImageUrl = m.ImageUrl,
+                Categories = m.Categories,
+            }).FirstOrDefaultAsync();
+
+            return movie;
+
+        }
     }
 }

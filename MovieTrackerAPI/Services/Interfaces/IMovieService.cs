@@ -6,6 +6,8 @@ namespace MovieTrackerAPI.Services.Interfaces
     {
         Task<(int, string)> CreateMovie(MovieDto movieDto);
 
+        Task<MovieDto?> GetMovieById(Guid Id);
+
         Task<Boolean> UpdateMovie(string Id);
 
         Task<Boolean> DeleteMovie(string Id);

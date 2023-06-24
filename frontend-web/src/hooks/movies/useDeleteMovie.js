@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { base_url } from '../../utils/Config';
 
 const useDeleteMovie = () => {
+  //TO DO: Falta implementar bien esto.
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -12,8 +13,8 @@ const useDeleteMovie = () => {
 
     try{
         const response = await fetch(base_url + "/api/Movies/", {
-            method: 'POST',
-            body: movieData,
+            method: 'DELETE',
+            body: id,
         });
 
         if(!response.ok){
@@ -31,7 +32,7 @@ const useDeleteMovie = () => {
         setIsLoading(false);
     }
   };
-  return [data, isLoading, error, createMovie];
+  return [data, isLoading, error, deleteMovie];
 }
 
-export default useCreateMovie;
+export default useDeleteMovie;
