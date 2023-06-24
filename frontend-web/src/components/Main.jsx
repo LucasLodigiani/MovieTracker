@@ -5,9 +5,8 @@ import { base_url } from '../utils/Config';
 const Main = () => {
   const [movie, setMovie] = useState([]);
   const horrorMovie = movie.filter(movie => movie.categories.some(category => category.name === "Terror"))
-  // const genreComedyMovies = movie.filter(movie => movie.Genre.includes('Comedy'));
-  // const genreDramaMovies = movie.filter(movie => movie.Genre.includes('Drama'));
-  // const genreCrimeMovies = movie.filter(movie => movie.Genre.includes('Crime'));
+  const suspenseMovie = movie.filter(movie => movie.categories.some(category => category.name === "Suspenso"))
+  
   useEffect(() => {
     const fetchData = async () => {
       try{
@@ -36,10 +35,8 @@ const Main = () => {
     <div>
       
       <Row movie={horrorMovie} Genre='Terror'/>
-      {/* <Row movie={genreComedyMovies} Genre='Comedia' /> */}
-      {/* <Row movie={genreWarMovies} Genre='Belica' /> */}
-      {/* <Row movie={genreDramaMovies} Genre='Drama'/> */}
-      {/* <Row movie={genreCrimeMovies} Genre='Crime'/> */}
+      <Row movie={suspenseMovie} Genre='Suspenso' />
+      
 
     </div>
   );
