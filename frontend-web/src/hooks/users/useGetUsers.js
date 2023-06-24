@@ -35,6 +35,7 @@ const useGetUsers = () => {
     fetchData();
   }, []);
 
+
   return [data, isLoading, error];
 };
 

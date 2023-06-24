@@ -4,6 +4,7 @@ import Modal from '../Shared/Modal';
 import Users from '../Users/Users';
 import CreateMovie from '../Movie/CreateMovie';
 import {BiSolidUserDetail} from "react-icons/bi"
+import { BiMovie } from 'react-icons/bi';
 const Header = () => {
   return (
     <header className="sticky top-0 left-0 right-0 z-10 shadow-md px-5 py-2 bg-gradient-to-r from-blue-900 to-indigo-900 ">
@@ -16,12 +17,12 @@ const Header = () => {
             Movies
           </Link>*/}
           <span className='rounded-md  hover:text-sky-500 px-5'>
-            <Modal title="Panel de Usuarios">
+            <Modal icon={<BiSolidUserDetail size={25} color="#235b8d"/>} title="Panel de Usuarios">
                   <Users/>
             </Modal>
           </span>
           <span className='rounded-md  hover:text-sky-500'>
-            <Modal title="Create Movie">
+            <Modal icon={<BiMovie size={25} color="#235b8d"/>}title="Create Movie">
                   <CreateMovie/>
             </Modal>
           </span>

@@ -17,9 +17,7 @@ const Users = () => {
           <p>{u.email}</p>
           <div className='ml-auto inline-flex'>
               <button className='bg-blue-500 hover:bg-blue-700 text-white px-2 rounded'>Editar</button>
-              <Modal title="Eliminar" buttonStyle="bg-red-500 hover:bg-red-700 text-white px-2 rounded ">
-                <DeleteUser user={u}></DeleteUser>
-              </Modal>
+              <DeleteUser user={u}></DeleteUser>
           </div>
           
       </Alert>);

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MovieTrackerAPI.Models;
+using MovieTrackerAPI.Models.DTOs;
 using MovieTrackerAPI.Services.Interfaces;
 
 namespace MovieTrackerAPI.Controllers
@@ -94,5 +95,17 @@ namespace MovieTrackerAPI.Controllers
             }
             return NoContent();
         }
+
+        [HttpPut]
+        public async Task<IActionResult> ModifyUser(UserDto user)
+        {
+            var (status, message) = await _userService.ModifyUser(user);
+            if (status == 0)
+            {
+                return BadRequest(message);
+            }
+            return Ok("Usuario modificado exitosamente");
+        }
+
     }
 }

@@ -20,13 +20,30 @@ namespace MovieTrackerAPI.Services.Implementations
         {
             try
             {
+                var categories = new List<Category>();
+
+                // Itera sobre cada categoría del cuerpo de la solicitud POST y verifica si ya existe en la base de datos
+                // Si existe, agréguela a la lista de categorías para esta película
+                foreach (var category in movieDto.Categories)
+                {
+                    var existingCategory = await _context.Categories.FirstOrDefaultAsync(c => c.Name == category.Name);
+                    if (existingCategory != null)
+                    {
+                        categories.Add(existingCategory);
+                    }
+                    else
+                    {
+                        categories.Add(new Category { Name = category.Name });
+                    }
+                }
+
                 string mediaUrl = await SaveImage(movieDto.Image);
 
                 Movie movie = new Movie
                 {
                     Id = Guid.NewGuid(),
                     Title = movieDto.Title,
-                    Categories = movieDto.Categories,
+                    Categories = categories,
                     ImageUrl = mediaUrl,
                 };
 

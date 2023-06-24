@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Modal = ({ title, buttonStyle,children }) => {
+const Modal = ({ title, icon,buttonStyle,children }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
@@ -21,7 +21,10 @@ const Modal = ({ title, buttonStyle,children }) => {
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="fixed inset-0 bg-black opacity-75"></div> {/* Capa de fondo oscuro */}
           <div className="absolute bg-white p-8 rounded shadow">
+          <div className="flex items-center justify-center"> {/* Contenedor flex para alinear el icono y el título */}
+            <span className="mr-1 mb-1.5">{icon}</span> {/* Agrega un margen derecho al icono */}
             <h2 className="text-lg font-bold mb-2 text-black text-center">{title}</h2>
+          </div>
             <hr></hr>
             {children}
             <hr></hr>

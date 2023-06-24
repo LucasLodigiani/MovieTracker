@@ -6,6 +6,7 @@ using MovieTrackerAPI.Models;
 using MovieTrackerAPI.Models.DTOs;
 using MovieTrackerAPI.Models.Entities;
 using MovieTrackerAPI.Services.Interfaces;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -121,6 +122,46 @@ namespace MovieTrackerAPI.Services.Implementations
             }
             await userManager.DeleteAsync(user);
             return (1, "User deleted");
+        }
+
+        public async Task<(int, string)> ModifyUser(UserDto userDto)
+        {
+            var user = await userManager.FindByIdAsync(userDto.Id);
+            if (user == null)
+            {
+                return (0, "Not found");
+            }
+
+            await userManager.SetUserNameAsync(user,userDto.UserName);
+            await userManager.SetEmailAsync(user, userDto.Email);
+            var changeRoles = await this.ChangeUserRoleAsync(user, userDto.Role);
+            if(changeRoles == true)
+            {
+                return (1, "Success");
+            }
+            else
+            {
+                return (0, "Ha ocurrido un error al modificar al usuario");
+            }
+
+        }
+
+        public async Task<Boolean> ChangeUserRoleAsync(User user, string Role)
+        {
+            if (await roleManager.RoleExistsAsync(Role))
+            {
+                var roles = await userManager.GetRolesAsync(user);
+                //remover roles
+                var removeRolesResult = await userManager.RemoveFromRolesAsync(user, roles);
+             
+                var addRolesResult = await userManager.AddToRoleAsync(user, Role);
+
+                return (true);
+            }
+            else
+            {
+                return (false);
+            }
         }
     }
 }
