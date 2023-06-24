@@ -5,8 +5,15 @@ import DeleteUser from './DeleteUser';
 import useGetUsers from '../../hooks/users/useGetUsers';
 
 const Users = () => {
-  const [users, isUsersLoading, isUsersLoadingError] = useGetUsers();
+  const [users, setUsers,isUsersLoading, usersError] = useGetUsers();
+  const [userResult, setUserResult] = useState("");
 
+  const handleDeleteCallback = (userDeletedId, result) => {
+    //Desde el componente hijo DeleteUser obtenemos el usuario eliminado, luego para forzar la re-renderizacion volvemos a setear el state con los usuarios filtrados.
+    const usersFiltered = users.filter((user) => user.id !== userDeletedId)
+    setUsers(usersFiltered);
+    setUserResult(result);
+  }
   //Para simplificar y hacer que se lea mejor el return.
   function renderUsers(){
     return users.map((u) => {
@@ -17,7 +24,7 @@ const Users = () => {
           <p>{u.email}</p>
           <div className='ml-auto inline-flex'>
               <button className='bg-blue-500 hover:bg-blue-700 text-white px-2 rounded'>Editar</button>
-              <DeleteUser user={u}></DeleteUser>
+              <DeleteUser user={u} DeleteCallback={handleDeleteCallback}></DeleteUser>
           </div>
           
       </Alert>);
@@ -28,7 +35,8 @@ const Users = () => {
     <>
         {isUsersLoading && <p>Cargando...</p>}
         {users !== null ? renderUsers() : null}
-        {isUsersLoadingError && <p>Ha ocurrido un error: {isUsersLoadingError}</p>}
+        {usersError && <p>Ha ocurrido un error: {usersError}</p>}
+        {userResult && <p>{userResult}</p>}
     </>
   )
 }

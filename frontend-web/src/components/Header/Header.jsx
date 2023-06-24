@@ -22,7 +22,7 @@ const Header = () => {
             </Modal>
           </span>
           <span className='rounded-md  hover:text-sky-500'>
-            <Modal icon={<BiMovie size={25} color="#235b8d"/>}title="Create Movie">
+            <Modal icon={<BiMovie size={25} color="#235b8d"/>} title="Create Movie">
                   <CreateMovie/>
             </Modal>
           </span>

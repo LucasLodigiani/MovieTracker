@@ -36,7 +36,7 @@ const useGetUsers = () => {
   }, []);
 
 
-  return [data, isLoading, error];
+  return [data, setData, isLoading, error];
 };
 
 export default useGetUsers;
