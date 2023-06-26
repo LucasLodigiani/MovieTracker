@@ -2,10 +2,14 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import useGetMovie from '../../hooks/movies/useGetMovie';
 import { base_url } from '../../utils/Config';
+import useGetReviews from '../../hooks/reviews/useGetReviews';
+import Review from '../Review/Review';
+import ReviewsContainer from '../Review/ReviewsContainer';
 
 const Movie = () => {
   const { id } = useParams();
   const [movie, isMovieLoading, isMovieLoadingError] = useGetMovie(id);
+  const [reviews, isReviewsLoading, isReviewsError] = useGetReviews(id);
 
   return (
     <div>
@@ -23,7 +27,8 @@ const Movie = () => {
         </>
       }
       {isMovieLoadingError && <p>Ha ocurrido un error: {isMovieLoadingError}</p>}
-
+      {reviews && <ReviewsContainer reviews={reviews}></ReviewsContainer>}
+      
     </div>
   )
 }

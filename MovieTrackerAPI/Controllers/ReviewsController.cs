@@ -41,6 +41,49 @@ namespace MovieTrackerAPI.Controllers
             return Ok(reviews);
         }
 
+        [HttpGet("id")]
+        public async Task<IActionResult> GetReviewsByMovie(Guid movieId)
+        {
+            var reviews = await _context.Reviews
+            .Where(r => r.MovieId == movieId)
+            .Include(r => r.Movie)
+            .Join(_context.Users, r => r.UserId, u => u.Id, (r, u) => new { Review = r, User = u })
+            .Join(_context.UserRoles, ur => ur.User.Id, ur => ur.UserId, (ur, userRole) => new { Review = ur.Review, User = ur.User, UserRole = userRole })
+            .Join(_context.Roles, ur => ur.UserRole.RoleId, role => role.Id, (ur, role) => new { Review = ur.Review, User = ur.User, Role = role })
+            .Select(ur => new ReviewDto
+            {
+                Id = ur.Review.Id,
+                Content = ur.Review.Content,
+                Rate = ur.Review.Rate,
+                MovieId = ur.Review.MovieId,
+                MovieTitle = ur.Review.Movie.Title,
+                UserId = ur.User.Id,
+                UserName = ur.User.UserName,
+                Role = ur.Role.Name
+            })
+            .ToListAsync();
+
+            return Ok(reviews);
+        }
+
+        [HttpDelete("id")]
+        public async Task<IActionResult> DeleteReview(int reviewId)
+        {
+            Review? review = await _context.Reviews.FirstOrDefaultAsync(r => r.Id == reviewId);
+            if(review == null)
+            {
+                return NotFound();
+            }
+
+            _context.Reviews.Remove(review);
+            await _context.SaveChangesAsync();
+
+            _context.Dispose();
+
+            return NoContent();
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> CreateReview(ReviewDto reviewDto)
         {
