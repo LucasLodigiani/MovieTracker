@@ -9,6 +9,8 @@ namespace MovieTrackerAPI.Data
     {
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Category> Categories { get; set; }
+
+        public DbSet<Review> Reviews { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 

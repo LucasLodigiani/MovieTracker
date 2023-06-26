@@ -198,6 +198,35 @@ namespace MovieTrackerAPI.Migrations
                     b.ToTable("Movies");
                 });
 
+            modelBuilder.Entity("MovieTrackerAPI.Models.Entities.Review", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("MovieId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<float>("Rate")
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MovieId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Reviews");
+                });
+
             modelBuilder.Entity("MovieTrackerAPI.Models.Entities.User", b =>
                 {
                     b.Property<string>("Id")
@@ -326,6 +355,35 @@ namespace MovieTrackerAPI.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("MovieTrackerAPI.Models.Entities.Review", b =>
+                {
+                    b.HasOne("MovieTrackerAPI.Models.Entities.Movie", "Movie")
+                        .WithMany("Reviews")
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MovieTrackerAPI.Models.Entities.User", "User")
+                        .WithMany("Reviews")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Movie");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("MovieTrackerAPI.Models.Entities.Movie", b =>
+                {
+                    b.Navigation("Reviews");
+                });
+
+            modelBuilder.Entity("MovieTrackerAPI.Models.Entities.User", b =>
+                {
+                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }
