@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Row from './Shared/Row';
 import { base_url } from '../utils/Config';
+import Dropdown from './Shared/Dropdown';
 
 const Main = () => {
   const [movie, setMovie] = useState([]);
@@ -33,11 +34,8 @@ const Main = () => {
   
   return (
     <div>
-      
       <Row movie={horrorMovie} Genre='Terror'/>
       <Row movie={suspenseMovie} Genre='Suspenso' />
-      
-
     </div>
   );
 };

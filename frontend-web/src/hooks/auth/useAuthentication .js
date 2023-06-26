@@ -1,0 +1,40 @@
+import React, { useContext } from 'react';
+import { UserContext } from '../../contexts/UserContext';
+
+const useAuthentication = () => {
+  const { user, setUser } = useContext(UserContext);
+
+  const setUserData = (data) => {
+    console.log(data);
+    localStorage.setItem('user', JSON.stringify(data))
+    setUser(data);
+  };
+
+  const isAuthenticated = () => {
+    if(user !== null){
+      return true;
+    }
+    else{
+      return false;
+    }
+  };
+
+  const isInRole = (role) => {
+    if(user.role === role){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+  const logout = () => {
+    console.log("Ejecutado")
+    localStorage.removeItem('user');
+    setUserData(null);
+  }
+
+  return [user, setUserData, isAuthenticated, isInRole, logout];
+};
+
+export default useAuthentication;
