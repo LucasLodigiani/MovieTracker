@@ -43,6 +43,7 @@ namespace MovieTrackerAPI.Services.Implementations
                 {
                     Id = Guid.NewGuid(),
                     Title = movieDto.Title,
+                    Description = movieDto.Description,
                     Categories = categories,
                     ImageUrl = mediaUrl,
                 };
@@ -105,6 +106,7 @@ namespace MovieTrackerAPI.Services.Implementations
             {
                 Id = m.Id,
                 Title = m.Title,
+                Description = m.Description,
                 ImageUrl = m.ImageUrl,
                 Categories = m.Categories,
             }).FirstOrDefaultAsync();

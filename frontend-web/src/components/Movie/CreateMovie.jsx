@@ -10,6 +10,7 @@ const CreateMovie = () => {
     const [categoriesData, isCategoriesLoading, isCategoriesLoadingError] = useGetCategories();
 
     const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
     const [categories, setCategories] = useState("");
     const [image, setImage] = useState();
     const [preview, setPreview] = useState();
@@ -17,6 +18,10 @@ const CreateMovie = () => {
       
       const handleTitleChange = (event) => {
         setTitle(event.target.value);
+      }
+
+      const handleDescriptionChange = (event) => {
+        setDescription(event.target.value);
       }
 
       const handleCategoriesChange = (event) => {
@@ -50,6 +55,7 @@ const CreateMovie = () => {
 
 
         formData.append('Title', title);
+        formData.append('Description', description);
         formData.append('Image', image);
 
         //Agregar categorias
@@ -67,6 +73,8 @@ const CreateMovie = () => {
     <form className='text-blue-950' encType="multipart/form-data">
         <label>Titulo: </label>
         <input type='text' className='border border-slate-800 rounded-sm' onChange={handleTitleChange} value={title}></input>
+        <label>Descripcion: </label>
+        <input type='text' className='border border-slate-800 rounded-sm' onChange={handleDescriptionChange} value={description}></input>
         <p className='text-gray-600 '>Categorias(en bd): 
             {isCategoriesLoading && <span>Cargando...</span>}
             {categoriesData !== null ? <span className='text-cyan-400'>{categoriesData.map((c) => c.name).join(', ')}</span> : null}
