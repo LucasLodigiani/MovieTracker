@@ -22,19 +22,20 @@ const Row = ({ movie, Genre }) => {
   const displayedMovies = endIdx < startIdx ? [...movie.slice(startIdx), ...movie.slice(0, endIdx + 1)] : movie.slice(startIdx, endIdx + 1);
 
   return (
-    <div>
-      <div className='text-center'>
+    <div className=''>
+      <div className='text-center  bg-gradient-to-r from-neutral-900 to-stone-800'>
         <h2>{Genre}</h2>
       </div>
       
-      <div className='flex flex-row'>
-      <button className='transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none ' onClick={handlePrevMovies}><FaArrowCircleLeft/> </button>
-        <div className='flex overflow-x-auto  '>
+      <div className='flex flex-row bg-gradient-to-r  from-indigo-950  via-blue-950  to-sky-950  '>
+      <button className='scale-150 transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none ' onClick={handlePrevMovies}><FaArrowCircleLeft/> </button>
+        <div className='flex overflow-x-auto justify-around  '>
           <MovieList movie={displayedMovies} className=''  />
         </div>
+      <button className='scale-150 transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none ' onClick={handleNextMovies}><FaArrowCircleRight /></button>
         
-      <button className=' transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none ' onClick={handleNextMovies}><FaArrowCircleRight /></button>
       </div>
+      
     </div>
   );
 };

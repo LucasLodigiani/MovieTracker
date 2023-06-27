@@ -5,14 +5,16 @@ import MovieHome from './MovieHome';
 
 const Main = () => {
   const movie = useGetMovies()
+  const actionMovie = movie.filter(movie => movie.categories.some(category => category.name === "Acción"))
   const horrorMovie = movie.filter(movie => movie.categories.some(category => category.name === "Terror"))
-  const suspenseMovie = movie.filter(movie => movie.categories.some(category => category.name === "Suspenso"))
+  const warMovie = movie.filter(movie => movie.categories.some(category => category.name === "Guerra"))
   
   return (
     <div>
       {/* <MovieHome movie={movie}/> */}
+      <Row movie={actionMovie} Genre='Acción'/>
       <Row movie={horrorMovie} Genre='Terror'/>
-      <Row movie={suspenseMovie} Genre='Suspenso'/>
+      <Row movie={warMovie} Genre='Guerra'/>
       
     </div>
 

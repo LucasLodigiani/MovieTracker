@@ -41,7 +41,7 @@ const Header = () => {
         <div>
           {isAuthenticated() === true ? 
           <div className="flex items-center">
-            <Dropdown icon={<IoMdArrowDropdown />} buttonText={<><p className="mr-1 hover:font-mono">Hola, {userData.name}!</p><FaUserAstronaut /></>}>
+            <Dropdown icon={<IoMdArrowDropdown />} buttonText={<><p className="mr-1 font-mono">Hola, {userData.name}!</p><FaUserAstronaut /></>}>
               <div className="flex flex-col">
                 <button className="flex-grow px-4 py-2 text-gray-800 hover:bg-blue-500 hover:text-white flex items-center">
                   <CgDarkMode size={20} />
@@ -61,7 +61,7 @@ const Header = () => {
             <Link to="/login" className="rounded-md  hover:text-sky-500	 px-5 ">
               Iniciar Sesión
             </Link>
-            <Link to="/register" className="rounded-md  hover:text-sky-500	hover:text-gray-300 px-5 ">
+            <Link to="/register" className="rounded-md  hover:text-sky-500 px-5 ">
               Registrar
             </Link>
           </>}

@@ -23,29 +23,32 @@ const Movie = () => {
   }, [reviews]);
 
   return (
-    <div>
+    <div >
       {isMovieLoading && <p>Cargando....</p>}
       {movie &&
         <>
-          <div className='items-center '>
+          <div className='bg-gradient-to-r from-blue-950  via-indigo-950 to-stone-900 '>
             <div className=''>
-              <img src={base_url + '/media/' + movie.imageUrl} alt='movie' className='' />
-              <h1>{movie.title}</h1>
+            <h1 className='text-white font-extrabold text-2xl tracking-wide leading-none text-center'>{movie.title}</h1>
+              <div className='flex items-center justify-arround '>
+                
+              <img src={base_url + '/media/' + movie.imageUrl} alt='movie' className='rounded-md' />
+              </div>
+              
               <h2>{movie.description}</h2>
               {ratePromedy && <p>Puntuacion: {ratePromedy}</p>}
               <p>Géneros: [{movie.categories.map(c => c.name).join(', ')}]</p>
             </div>
-            
           </div>
 
         </>
       }
-      {isMovieLoadingError && <p>Ha ocurrido un error: {isMovieLoadingError}</p>}
+      {/* {isMovieLoadingError && <p>Ha ocurrido un error: {isMovieLoadingError}</p>}
       {movie && <CreateReview movieId={id}></CreateReview>}
       {reviews && <ReviewsContainer reviews={reviews}></ReviewsContainer>}
       {isReviewsLoading && <p>Cargando reviews...</p>}
       {isReviewsError && <p>Ha ocurrido un error al cargar las reviews: {isReviewsError}</p>}
-      
+       */}
     </div>
   )
 }
