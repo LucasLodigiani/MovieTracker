@@ -2,7 +2,7 @@ import React from 'react';
 import { FaUserAstronaut } from 'react-icons/fa';
 import { BiSolidStar } from 'react-icons/bi';
 
-const Review = ({ userName, role, rate, content }) => {
+const Review = ({ userName, role, rate, title,content }) => {
   return (
     <div className="bg-gray-800 p-3 rounded-sm hover:bg-gray-700 mb-1" style={{ boxShadow: 'inset 0 0 5px rgba(0, 0, 0, 0.3)' }}> 
       <div className="flex items-center mb-2">
@@ -18,7 +18,7 @@ const Review = ({ userName, role, rate, content }) => {
             <p className=" bg-blue-900 hover:bg-blue-700 text-white rounded px-1">{role}</p>
           )}
           <div className="flex items-center">
-            <div className="bg-gray-500 rounded-sm p-0.4 mr-1 ml-1 flex items-center">
+            <div className="bg-gray-500 rounded-sm p-0.3 mr-1 ml-1 flex items-center">
                 <BiSolidStar color="#fdd970" className="text-white" />
                 <p className="mb-0 ml-1 text-white">{rate}</p>
             </div>
@@ -27,8 +27,8 @@ const Review = ({ userName, role, rate, content }) => {
         
       </div>
 
-      <p className="font-bold">Perfecta.... pero le falto</p>
-      <p>{content}</p>
+      <p className="font-bold">{title}</p>
+      <p className='text-md'>{content}</p>
     </div>
   );
 };

@@ -11,7 +11,7 @@ using MovieTrackerAPI.Data;
 namespace MovieTrackerAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230626184519_Initial1")]
+    [Migration("20230627043057_Initial1")]
     partial class Initial1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -213,8 +213,12 @@ namespace MovieTrackerAPI.Migrations
                     b.Property<Guid>("MovieId")
                         .HasColumnType("TEXT");
 
-                    b.Property<float>("Rate")
+                    b.Property<double>("Rate")
                         .HasColumnType("REAL");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("UserId")
                         .IsRequired()

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Dropdown = () => {
+const Dropdown = ({ icon, buttonText, children }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -8,29 +8,18 @@ const Dropdown = () => {
   };
 
   return (
-    <>
-      <button
-        className=""
-        onClick={toggleDropdown}
-      >
-        Mostrar Menú
+    <div className="relative">
+      <button className="flex items-center" onClick={toggleDropdown}>
+        {buttonText}
+        {icon}
       </button>
 
       {isOpen && (
-        <div className="absolute mt-0.5 w-48 bg-white rounded-md shadow-lg">
-          {/* Contenido del menú desplegable */}
-          <a href="test" className="block px-4 py-2 text-gray-800 hover:bg-blue-500 hover:text-white">
-            Opción 1
-          </a>
-          <a href="test" className="block px-4 py-2 text-gray-800 hover:bg-blue-500 hover:text-white">
-            Opción 2
-          </a>
-          <a href="test" className="block px-4 py-2 text-gray-800 hover:bg-blue-500 hover:text-white">
-            Opción 3
-          </a>
+        <div className="absolute right-0 mt-2 w-48 transform translate-x-5 bg-white rounded-md shadow-lg">
+          {children}          
         </div>
       )}
-    </>
+    </div>
   );
 };
 

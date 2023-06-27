@@ -211,8 +211,12 @@ namespace MovieTrackerAPI.Migrations
                     b.Property<Guid>("MovieId")
                         .HasColumnType("TEXT");
 
-                    b.Property<float>("Rate")
+                    b.Property<double>("Rate")
                         .HasColumnType("REAL");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("UserId")
                         .IsRequired()

@@ -7,6 +7,7 @@ const ReviewsContainer = ({ reviews }) => {
       {reviews.map((review) => (
         <Review key={review.id} 
           userName={review.userName}
+          title={review.title}
           role={review.role}
           rate={review.rate}
           content={review.content}></Review>

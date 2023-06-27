@@ -11,6 +11,7 @@ const useAuthentication = () => {
   };
 
   const isAuthenticated = () => {
+    console.log("Verificacion")
     if(user !== null){
       return true;
     }
@@ -31,6 +32,7 @@ const useAuthentication = () => {
   const logout = () => {
     console.log("Ejecutado")
     localStorage.removeItem('user');
+    localStorage.removeItem('jwt');
     setUserData(null);
   }
 

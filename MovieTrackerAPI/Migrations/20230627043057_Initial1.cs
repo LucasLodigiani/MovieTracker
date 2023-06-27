@@ -211,8 +211,9 @@ namespace MovieTrackerAPI.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    Title = table.Column<string>(type: "TEXT", nullable: false),
                     Content = table.Column<string>(type: "TEXT", nullable: false),
-                    Rate = table.Column<float>(type: "REAL", nullable: false),
+                    Rate = table.Column<double>(type: "REAL", nullable: false),
                     MovieId = table.Column<Guid>(type: "TEXT", nullable: false),
                     UserId = table.Column<string>(type: "TEXT", nullable: false)
                 },
