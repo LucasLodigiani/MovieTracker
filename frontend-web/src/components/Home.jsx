@@ -10,12 +10,7 @@ const Main = () => {
   
   return (
     <div>
-      {/* <MovieHome movie={movie}/> */}
-      {/* && <>
-        <Row movies={actionMovie} Genre='Acción'/>
-        <Row movies={horrorMovie} Genre='Terror'/>
-        <Row movies={warMovie} Genre='Guerra'/>
-      </>*/}
+
       <MovieCarousel movies={movies} title={"Últimas agregadas:"}></MovieCarousel>
       <MovieCarousel movies={actionMovie} title={"Acción:"}></MovieCarousel>
       

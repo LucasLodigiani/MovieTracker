@@ -23,32 +23,31 @@ const Movie = () => {
   }, [reviews]);
 
   return (
-    <div >
+    <div className='' >
       {isMovieLoading && <p>Cargando....</p>}
       {movie &&
-        <>
-          <div className='bg-gradient-to-r from-blue-950  via-indigo-950 to-stone-900 '>
-            <div className=''>
-            <h1 className='text-white font-extrabold text-2xl tracking-wide leading-none text-center'>{movie.title}</h1>
-              <div className='flex items-center justify-arround '>
-                
-              <img src={base_url + '/media/' + movie.imageUrl} alt='movie' className='rounded-md' />
-              </div>
-              
-              <h2>{movie.description}</h2>
-              {ratePromedy && <p>Puntuacion: {ratePromedy}</p>}
-              <p>Géneros: [{movie.categories.map(c => c.name).join(', ')}]</p>
-            </div>
+        <div className='container mx-auto px-4 '>
+          <h1 className='text-white font-extrabold text-2xl tracking-wide leading-none text-center'>{movie.title}</h1>
+          <div className='flex items-center float-right bg-slate-600 rounded-md  '>
+            <img src={base_url + '/media/' + movie.imageUrl} alt='movie' className='mx-4 w-32 h-48 rounded-md  ' />
+            <p className='tracking-wide leading-loose text-left ps-8'>{movie.description}</p>
           </div>
-
-        </>
+          {ratePromedy && <p>Puntuacion: {ratePromedy}</p>}
+          <p>Géneros: [{movie.categories.map(c => c.name).join(', ')}]</p>
+        </div>
       }
-      {/* {isMovieLoadingError && <p>Ha ocurrido un error: {isMovieLoadingError}</p>}
-      {movie && <CreateReview movieId={id}></CreateReview>}
-      {reviews && <ReviewsContainer reviews={reviews}></ReviewsContainer>}
+      {isMovieLoadingError && <p>Ha ocurrido un error: {isMovieLoadingError}</p>}
+      <div className='container mx-auto px-4 rounded-md'>
+        <div className='w-3/4 mx-96'>
+          {movie && <CreateReview movieId={id}></CreateReview>}
+          {reviews && <ReviewsContainer reviews={reviews}></ReviewsContainer>}
+        </div>
+      </div>
+
+
       {isReviewsLoading && <p>Cargando reviews...</p>}
       {isReviewsError && <p>Ha ocurrido un error al cargar las reviews: {isReviewsError}</p>}
-       */}
+
     </div>
   )
 }

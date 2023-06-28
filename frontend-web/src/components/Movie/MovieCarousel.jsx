@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { ThemeContext } from '../../contexts/ThemeContext';
 import { base_url } from '../../utils/Config';
 import { FaArrowCircleRight, FaArrowCircleLeft } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const MovieCarousel = ({ movies, title }) => {
+  const { theme } = useContext(ThemeContext);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [numVisibleMovies, setNumVisibleMovies] = useState(8);
 
@@ -39,11 +42,13 @@ const MovieCarousel = ({ movies, title }) => {
     return slicedMovies.map((movie, index) => (
       <div key={index} className='flex-grow'>
         <div className='relative w-32 h-48'>
-          <img
-            src={base_url + '/media/' + movie.imageUrl}
-            alt='movie'
-            className='w-full h-full object-cover rounded-md hover:outline outline-offset-2 outline-cyan-500 transition-transform duration-300 hover:scale-105'
-          />
+          <Link to={`/movie/${movie.id}`}>
+            <img
+              src={base_url + '/media/' + movie.imageUrl}
+              alt='movie'
+              className={`w-full h-full object-cover rounded-md  ${theme === 'light' ? 'hover:outline outline-offset-2 outline-pink-700 transition-transform duration-300 hover:scale-105' : 'hover:outline outline-offset-2 outline-cyan-500 transition-transform duration-300 hover:scale-105'}`}
+            />
+          </Link>
         </div>
       </div>
     ));
