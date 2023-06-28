@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Main from './components/Main';
 import Movie from './components/Movie/Movie'
+import Home from './components/Home'
 import { UserProvider } from './contexts/UserContext';
 import Register from './components/Auth/Register';
 import Login from './components/Auth/Login';
@@ -22,7 +22,7 @@ const App = () => {
             <Route path="/Login" element={<Login />} />
             <Route path="/Register" element={<Register />} />
             <Route path="/Movie" element={<Movie/>}/>
-            <Route path="/" element={<Main />} />
+            <Route path="/" element={<Home />} />
           </Routes>
         </UserProvider>
       </Router>

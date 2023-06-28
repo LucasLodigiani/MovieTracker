@@ -17,7 +17,7 @@ const Header = () => {
   const [userData, setUserData, isAuthenticated, isInRole, logout] = useAuthentication();
 
   return (
-    <header className="sticky top-0 left-0 right-0 z-10 shadow-md px-5 py-2 bg-gradient-to-r from-blue-900 to-indigo-900 ">
+    <header className="sticky top-0 left-0 right-0 z-10 shadow-md px-5 py-2 bg-gradient-to-r from-blue-900 to-indigo-900 mb-3 ">
       <div className="flex items-center justify-between">
         <div className="flex items-center justify-start">
           <Link to="/" className="text-xl font-bold text-white hover:text-sky-600 mr-5">
