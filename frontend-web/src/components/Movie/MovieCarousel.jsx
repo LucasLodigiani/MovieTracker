@@ -56,13 +56,13 @@ const MovieCarousel = ({ movies, title }) => {
 
   return (
     <div>
-      <p className='ml-6 mb-2 text-white text-xl font-mono'>{title}</p>
+      <p className={`ml-6 mb-2 text-xl font-mono ${theme === 'light' ? 'text-pink-700':'text-sky-500'}`}>{title}</p>
       <div className='flex items-center'>
-        <button onClick={handlePrevious} className='px-2 py-1'>
+        <button onClick={handlePrevious} className={`px-2 py-1 ${theme === 'light' ? 'text-red-950 ':'text-blue-700 '} scale-120`}>
           <FaArrowCircleLeft />
         </button>
         <div className='flex flex-grow'>{renderMovies()}</div>
-        <button onClick={handleNext} className='px-2 py-1'>
+        <button onClick={handleNext} className={`px-2 py-1 ${theme === 'light' ? 'text-red-950 ':'text-blue-700 '} scale-120`}>
           <FaArrowCircleRight />
         </button>
       </div>

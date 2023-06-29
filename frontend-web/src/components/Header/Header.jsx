@@ -16,17 +16,17 @@ import { ThemeContext } from '../../contexts/ThemeContext';
 const Header = () => {
   const [userData, setUserData, isAuthenticated, isInRole, logout] = useAuthentication();
   const { theme, toggleTheme } = useContext(ThemeContext);
-  document.body.className = theme === 'light' ? 'bg-white' : 'bg-gradient-to-r from-gray-950 via-gray-950 to-gray-950';
+  document.body.className = theme === 'light' ? 'bg-rose-50' : 'bg-gradient-to-r from-gray-950 via-gray-950 to-gray-950';
 
 
-  const headerClasses = `sticky top-0 left-0 right-0 z-10 shadow-md px-5 py-2 mb-3 ${theme === 'light' ? 'bg-white text-black' : 'bg-gradient-to-r from-blue-900 to-indigo-900 text-white'
+  const headerClasses = `sticky top-0 left-0 right-0 z-10 shadow-md px-5 py-2 mb-3 ${theme === 'light' ? 'bg-gradient-to-r from-pink-950 to-rose-950 text-white' : 'bg-gradient-to-r from-blue-900 to-indigo-900 text-white'
     }`;
 
   return (
     <header className={headerClasses}>
       <div className="flex items-center justify-between">
         <div className="flex items-center justify-start">
-          <Link to="/" className={`text-xl font-bold ${theme === 'light' ? 'text-black hover:text-pink-700' : 'text-white hover:text-cyan-300'}  mr-5`}>
+          <Link to="/" className={`text-xl font-bold ${theme === 'light' ? 'text-white hover:text-pink-700' : 'text-white hover:text-cyan-300'}  mr-5`}>
             MovieTracker
           </Link>
           <span className={`rounded-md ${theme === 'light' ? 'hover:text-pink-700' : 'hover:text-cyan-300'} px-5 `}>
