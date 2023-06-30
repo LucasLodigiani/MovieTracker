@@ -31,6 +31,7 @@ const useLogin = () => {
             const jwtToken = await response.text();
             const decodedToken = jwtDecode(jwtToken);
             localStorage.setItem('jwt', jwtToken);
+            localStorage.setItem('favoriteMovies', JSON.stringify([]))
             setUserData({ id: decodedToken.unique_id, name: decodedToken.unique_name, role: decodedToken.role });
             setData(jwtToken);
             setIsLoading(false);

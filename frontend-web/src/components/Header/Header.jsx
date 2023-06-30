@@ -31,21 +31,25 @@ const Header = () => {
           <Link to="/" className={`text-xl font-bold ${theme === 'light' ? 'text-white hover:text-pink-700' : 'text-white hover:text-cyan-300'}  mr-5`}>
             MovieTracker
           </Link>
+          {isInRole("Admin") && 
           <span className={`rounded-md ${theme === 'light' ? 'hover:text-pink-700' : 'hover:text-cyan-300'} px-5 `}>
             <Modal icon={<BiSolidUserDetail size={25} color="#235b8d" />} title="Panel de Usuarios">
               <Users />
             </Modal>
-          </span>
+          </span> }
+          {isInRole("Admin") && 
           <span className={`${theme === 'light' ? 'hover:text-pink-700' : 'hover:text-cyan-300'} px-5 `}>
             <Modal icon={<BiMovie size={25} color="#235b8d" />} title="Create Movie">
               <CreateMovie />
             </Modal>
-          </span>
+          </span> }
+          {isAuthenticated() && 
           <span className={`${theme === 'light' ? 'hover:text-pink-700' : 'hover:text-cyan-300'} px-5 `}>
-          <Modal icon={<MdMovieFilter />} title="Favoritos" >
-            <Favorites></Favorites>
-          </Modal>
-          </span>
+            <Modal icon={<MdMovieFilter />} title="Favoritos" >
+              <Favorites></Favorites>
+            </Modal>
+          </span> }
+          
         </div>
         <div className="flex items-center justify-between text-blue-gray-900"></div>
         <div>

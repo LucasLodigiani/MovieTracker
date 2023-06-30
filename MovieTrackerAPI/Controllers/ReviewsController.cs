@@ -71,11 +71,11 @@ namespace MovieTrackerAPI.Controllers
         }
 
         [HttpDelete("id")]
-        
+
         public async Task<IActionResult> DeleteReview(int reviewId)
         {
             Review? review = await _context.Reviews.FirstOrDefaultAsync(r => r.Id == reviewId);
-            if(review == null)
+            if (review == null)
             {
                 return NotFound();
             }
@@ -103,6 +103,8 @@ namespace MovieTrackerAPI.Controllers
 
             // Acceder a los campos del JWT
             var userId = decodedToken.Claims.FirstOrDefault(c => c.Type == "unique_id")?.Value;
+
+            var userRole = decodedToken.Claims.FirstOrDefault(c => c.Type == "role")?.Value;
             //var userName = decodedToken.Claims.FirstOrDefault(c => c.Type == "unique_name")?.Value;
             // ...
 
@@ -132,7 +134,10 @@ namespace MovieTrackerAPI.Controllers
             await _context.Reviews.AddAsync(review);
             await _context.SaveChangesAsync();
 
-            return Ok(review);
+            reviewDto.Role = userRole;
+            reviewDto.Id = review.Id;
+
+            return Ok(reviewDto);
         }
     }
 }

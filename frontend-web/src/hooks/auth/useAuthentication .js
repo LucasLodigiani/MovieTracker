@@ -21,7 +21,7 @@ const useAuthentication = () => {
   };
 
   const isInRole = (role) => {
-    if(isAuthenticated === true){
+    if(isAuthenticated() === true){
       if(user.role === role){
         return true;
       }
@@ -36,6 +36,7 @@ const useAuthentication = () => {
   const logout = () => {
     console.log("Ejecutado")
     localStorage.removeItem('user');
+    localStorage.removeItem('favoriteMovies');
     localStorage.removeItem('jwt');
     setUserData(null);
   }
