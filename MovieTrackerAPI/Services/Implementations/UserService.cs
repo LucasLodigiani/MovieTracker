@@ -131,28 +131,30 @@ namespace MovieTrackerAPI.Services.Implementations
             {
                 return (0, null);
             }
+            if(userDto.UserName != "")
+            {
+                await userManager.SetUserNameAsync(user, userDto.UserName);
 
-            await userManager.SetUserNameAsync(user,userDto.UserName);
-            await userManager.SetEmailAsync(user, userDto.Email);
-            var changeRoles = await this.ChangeUserRoleAsync(user, userDto.Role);
-
+            }
+            if(userDto.Email != "")
+            {
+                await userManager.SetEmailAsync(user, userDto.Email);
+            }
             
+            if(userDto.Role != "")
+            {
+                var changeRoles = await this.ChangeUserRoleAsync(user, userDto.Role);
+            }
 
-            if(changeRoles == true)
+
+            UserDto userChanged = new UserDto
             {
-                UserDto userChanged = new UserDto
-                {
-                    Id = user.Id,
-                    UserName = user.UserName,
-                    Email = user.Email,
-                    Role = userDto.Role,
-                };
-                return (1, userChanged);
-            }
-            else
-            {
-                return (0, null);
-            }
+                Id = user.Id,
+                UserName = user.UserName,
+                Email = user.Email,
+                Role = userDto.Role,
+            };
+            return (1, userChanged);
 
         }
 

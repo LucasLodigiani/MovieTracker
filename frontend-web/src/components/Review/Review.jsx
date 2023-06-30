@@ -2,7 +2,6 @@ import React, { useContext} from 'react';
 import { FaUserAstronaut } from 'react-icons/fa';
 import { BiSolidStar } from 'react-icons/bi';
 import { ThemeContext } from '../../contexts/ThemeContext';
-import DeleteReviews from './DeleteReviews';
 
 const Review = ({ userName, role, rate, title, content}) => {
   

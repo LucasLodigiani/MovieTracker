@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Alert from '../Shared/Alert';
 import Modal from '../Shared/Modal';
-import { BiSolidUserMinus } from 'react-icons/bi';
+import { FaUserEdit } from 'react-icons/fa';
 import ButtonLoading from '../Shared/ButtonLoading';
 import useDeleteUser from '../../hooks/users/useDeleteUser';
 import useUpdateUser from '../../hooks/users/useUpdateUser';
@@ -33,7 +33,7 @@ const UpdateUser = ({ user }) => {
   };
 
   return (
-    <Modal icon={<BiSolidUserMinus size={25} color="#235b8d" />} title="Editar" buttonStyle="bg-blue-500 hover:bg-red-700 text-white px-2 rounded">
+    <Modal icon={<FaUserEdit size={25} color="#235b8d" />} title="Editar" buttonStyle="bg-blue-500 hover:bg-red-700 text-white px-2 rounded">
       <p>Username</p>
       <input type='text' value={userName} onChange={handleUsername} placeholder={user.userName}></input>
       <p>Email</p>
@@ -42,7 +42,7 @@ const UpdateUser = ({ user }) => {
       <input type='text' value={role} onChange={handleRole} placeholder={user.role}></input>
       {updateUserResult && <p>Usuario modificado exitosamente!</p>}
       {UserError && <p>Ha ocurrido un error: {UserError}</p>}
-      <ButtonLoading buttonText="Eliminar" isLoading={isUserLoading} onClick={handleUpdate}></ButtonLoading>
+      <ButtonLoading buttonText="Modificar" isLoading={isUserLoading} onClick={handleUpdate}></ButtonLoading>
     </Modal>
   );
 }
