@@ -7,6 +7,7 @@ import ReviewsContainer from '../Review/ReviewsContainer';
 import CreateReview from '../Review/CreateReview';
 import { ThemeContext } from '../../contexts/ThemeContext';
 import AddToFavorites from './AddToFavorites';
+import useAuthentication from '../../hooks/auth/useAuthentication ';
 
 const Movie = () => {
   const { id } = useParams();
@@ -14,6 +15,7 @@ const Movie = () => {
   const [movie, isMovieLoading, isMovieLoadingError] = useGetMovie(id);
   const [reviews, isReviewsLoading, isReviewsError] = useGetReviews(id);
   const { theme } = useContext(ThemeContext);
+  const [userData, setUserData, isAuthenticated, isInRole, logout] = useAuthentication();
 
   useEffect(() => {
     //Obtener el promedio de las puntuaciones
@@ -46,7 +48,7 @@ const Movie = () => {
             </p>
           </div>
           <div className={`mx-32 ${theme === 'light' ? 'text-black' : 'text-white'}`}>
-            <AddToFavorites id={id}></AddToFavorites>
+            {isAuthenticated() && <AddToFavorites id={id}></AddToFavorites>}
             <p className={`tracking-wide leading-loose ${theme === 'light' ? 'text-black' : 'text-white'} `}>
               Fecha de estreno: {movie.releaseDate}
             </p>

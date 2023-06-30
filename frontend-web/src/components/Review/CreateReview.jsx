@@ -56,6 +56,8 @@ const CreateReview = ({ movieId }) => {
                 onChange={rateHandler}
                 type='number'
                 className='text-center mx-12 w-10/12 text-black rounded-full placeholder:italic placeholder:text-slate-400 block bg-white border border-slate-300 py-2 pl-9 pr-3 focus:outline-none focus:border-rose-950 focus:ring-rose-500 focus:ring-1 sm:text-sm'
+                min={1}
+                max={5}
               />
               <p className='mx-48'>Encabezado</p>
               <input
