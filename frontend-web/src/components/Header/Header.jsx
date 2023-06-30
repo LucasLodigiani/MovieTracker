@@ -34,7 +34,7 @@ const Header = () => {
               <Users />
             </Modal>
           </span>
-          <span className={`rounded-md ${theme === 'light' ? 'hover:text-pink-700' : 'hover:text-cyan-300'} px-5 `}>
+          <span className={`${theme === 'light' ? 'hover:text-pink-700' : 'hover:text-cyan-300'} px-5 `}>
             <Modal icon={<BiMovie size={25} color="#235b8d" />} title="Create Movie">
               <CreateMovie />
             </Modal>
@@ -44,19 +44,14 @@ const Header = () => {
         <div>
           {isAuthenticated() === true ? (
             <div className="flex items-center">
-              <Dropdown icon={<IoMdArrowDropdown />} buttonText={<><p className={`mr-1 font-mono ${theme === 'light' ? 'hover:text-pink-700':'text-white hover:text-sky-500'}`}>Hola, {userData.name}!</p><FaUserAstronaut className={`${theme === 'light' ? 'text-pink-700':'text-white'}`}/></>}>
+              <Dropdown icon={<IoMdArrowDropdown />} buttonText={<><p className={`mr-1 font-mono ${theme === 'light' ? 'hover:text-pink-700' : 'text-white hover:text-sky-500'}`}>Hola, {userData.name}!</p><FaUserAstronaut className={`${theme === 'light' ? 'text-pink-700' : 'text-white'}`} /></>}>
                 <div className="flex flex-col">
                   <button onClick={toggleTheme} className={`flex-grow px-4 py-2 text-gray-800 ${theme === 'light' ? 'hover:bg-pink-700 hover:text-white' : 'hover:bg-violet-700 hover:text-white'
                     } flex items-center`}>
                     <CgDarkMode size={20} />
                     <p className="mb-0.5 ml-1">Cambiar Tema</p>
                   </button>
-
-                  <button
-                    onClick={logout}
-                    className={`flex-grow px-4 py-2 text-gray-800 ${theme === 'light' ? 'hover:bg-pink-700 hover:text-white' : 'hover:bg-violet-700 hover:text-white'
-                  } flex items-center`}>
-                    <BiLogOut size={20} />
+                  <button onClick={logout} className={`flex-grow px-4 py-2 text-gray-800 ${theme === 'light' ? 'hover:bg-pink-700 hover:text-white' : 'hover:bg-violet-700 hover:text-white'} flex items-center`}><BiLogOut size={20} />
                     <p className="mb-0.5 ml-1">Salir</p>
                   </button>
                 </div>
@@ -64,10 +59,10 @@ const Header = () => {
             </div>
           ) : (
             <>
-              <Link to="/login" className="rounded-md hover:text-sky-500 px-5">
+              <Link to="/login" className={`rounded-md ${theme === 'light' ? 'hover:text-pink-700' : 'hover:text-cyan-300'} px-5 `}>
                 Iniciar Sesión
               </Link>
-              <Link to="/register" className="rounded-md hover:text-sky-500 px-5">
+              <Link to="/register" className={`rounded-md ${theme === 'light' ? 'hover:text-pink-700' : 'hover:text-cyan-300'} px-5 `}>
                 Registrar
               </Link>
             </>
