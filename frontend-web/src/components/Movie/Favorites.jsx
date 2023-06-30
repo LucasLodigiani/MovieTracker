@@ -10,7 +10,8 @@ import { Link } from 'react-router-dom';
 const Favorites = () => {
   const [favorites, setFavorites, isFavoritesLoading, favoritesError] = useGetFavorites(JSON.parse(localStorage.getItem("favoriteMovies")));
 
-  const handleMovieDelete = (index) => {
+  const handleMovieDelete = (event,index) => {
+    event.preventDefault();
     const updatedFavorites = [...favorites];
     updatedFavorites.splice(index, 1);
     setFavorites(updatedFavorites);
@@ -36,7 +37,7 @@ const Favorites = () => {
                 <img src={base_url + '/media/' + favorite.imageUrl} alt='movieImage' className='mx-4 w-12 h-15'/>
                 <p className='flex items-center text-black font-mono pr-48 text-lg'>{favorite.title}</p>
                 <div className='flex items-center'>
-                    <button onClick={() => handleMovieDelete(index)} className='bg-red-500 hover:bg-red-700 text-white px-2 flex items-center scale-110 rounded-sm'><HiOutlineMinusSm></HiOutlineMinusSm>Eliminar</button>
+                    <button onClick={(event) => handleMovieDelete(event,index)} className='bg-red-500 hover:bg-red-700 text-white px-2 flex items-center scale-110 rounded-sm'><HiOutlineMinusSm></HiOutlineMinusSm>Eliminar</button>
                 </div>
             </Alert>
           </Link>
