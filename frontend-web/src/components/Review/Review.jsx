@@ -3,9 +3,11 @@ import { FaUserAstronaut } from 'react-icons/fa';
 import { BiSolidStar } from 'react-icons/bi';
 import { ThemeContext } from '../../contexts/ThemeContext';
 import DeleteReview from './DeleteReview';
+import useAuthentication from '../../hooks/auth/useAuthentication ';
 
 const Review = ({ id, userName, role, rate, title, content}) => {
-  
+  const [userData, setUserData, isAuthenticated, isInRole, logout] = useAuthentication();
+
   const { theme } = useContext(ThemeContext);
   return (
 
@@ -38,8 +40,10 @@ const Review = ({ id, userName, role, rate, title, content}) => {
               <BiSolidStar color='#fdd970' className='text-white' />
               <p className='mb-0 ml-1 text-white'>{rate}</p>
             </div>
-            <DeleteReview id={id}></DeleteReview>
-          </div>
+            {isInRole("Admin") &&
+              <DeleteReview id={id}></DeleteReview>
+            }
+          </div>  
         </div>
       </div>
 
