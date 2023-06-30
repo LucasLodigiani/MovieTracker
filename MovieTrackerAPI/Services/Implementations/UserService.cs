@@ -86,7 +86,7 @@ namespace MovieTrackerAPI.Services.Implementations
                 Issuer = _configuration["JWTKey:ValidIssuer"],
                 Audience = _configuration["JWTKey:ValidAudience"],
                 //Expires = DateTime.UtcNow.AddHours(_TokenExpiryTimeInHour),
-                Expires = DateTime.UtcNow.AddMinutes(70),
+                Expires = DateTime.UtcNow.AddHours(70),
                 SigningCredentials = new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256),
                 Subject = new ClaimsIdentity(claims)
             };
@@ -124,44 +124,52 @@ namespace MovieTrackerAPI.Services.Implementations
             return (1, "User deleted");
         }
 
-        public async Task<(int, string)> ModifyUser(UserDto userDto)
+        public async Task<(int, UserDto)> ModifyUser(UserDto userDto)
         {
             var user = await userManager.FindByIdAsync(userDto.Id);
             if (user == null)
             {
-                return (0, "Not found");
+                return (0, null);
             }
 
             await userManager.SetUserNameAsync(user,userDto.UserName);
             await userManager.SetEmailAsync(user, userDto.Email);
             var changeRoles = await this.ChangeUserRoleAsync(user, userDto.Role);
+
+            
+
             if(changeRoles == true)
             {
-                return (1, "Success");
+                UserDto userChanged = new UserDto
+                {
+                    Id = user.Id,
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    Role = userDto.Role,
+                };
+                return (1, userChanged);
             }
             else
             {
-                return (0, "Ha ocurrido un error al modificar al usuario");
+                return (0, null);
             }
 
         }
 
         public async Task<Boolean> ChangeUserRoleAsync(User user, string Role)
         {
-            if (await roleManager.RoleExistsAsync(Role))
+            if(!await roleManager.RoleExistsAsync(Role))
             {
-                var roles = await userManager.GetRolesAsync(user);
-                //remover roles
-                var removeRolesResult = await userManager.RemoveFromRolesAsync(user, roles);
-             
-                var addRolesResult = await userManager.AddToRoleAsync(user, Role);
+                await roleManager.CreateAsync(new IdentityRole(Role));
+            }
 
-                return (true);
-            }
-            else
-            {
-                return (false);
-            }
+            var roles = await userManager.GetRolesAsync(user);
+            //remover roles
+            var removeRolesResult = await userManager.RemoveFromRolesAsync(user, roles);
+
+            var addRolesResult = await userManager.AddToRoleAsync(user, Role);
+
+            return (true);
         }
     }
 }

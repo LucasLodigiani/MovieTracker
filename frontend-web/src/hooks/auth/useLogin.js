@@ -35,6 +35,7 @@ const useLogin = () => {
             setData(jwtToken);
             setIsLoading(false);
             setError(null);
+            
         }
         catch(error){
             setError(error.message);

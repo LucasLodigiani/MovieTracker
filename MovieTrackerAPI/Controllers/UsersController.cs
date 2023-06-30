@@ -99,12 +99,12 @@ namespace MovieTrackerAPI.Controllers
         [HttpPut]
         public async Task<IActionResult> ModifyUser(UserDto user)
         {
-            var (status, message) = await _userService.ModifyUser(user);
+            var (status, userModified) = await _userService.ModifyUser(user);
             if (status == 0)
             {
-                return BadRequest(message);
+                return BadRequest("Ha ocurrido un error al modificar al usuario");
             }
-            return Ok("Usuario modificado exitosamente");
+            return Ok(userModified);
         }
 
     }

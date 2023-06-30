@@ -3,6 +3,7 @@ import Alert from '../Shared/Alert';
 import Modal from '../Shared/Modal';
 import DeleteUser from './DeleteUser';
 import useGetUsers from '../../hooks/users/useGetUsers';
+import UpdateUser from './UpdateUser';
 
 const Users = () => {
   const [users, setUsers,isUsersLoading, usersError] = useGetUsers();
@@ -14,16 +15,19 @@ const Users = () => {
     setUsers(usersFiltered);
     setUserResult(result);
   }
+
+  
   //Para simplificar y hacer que se lea mejor el return.
   function renderUsers(){
     return users.map((u) => {
       return(
       <Alert key={u.id}>
+          {console.log(u)}
           {u.role === "Admin" || u.role === "Mod" ? <p className='bg-red-600 text-white rounded px-2'>{u.role}</p> : <p className='bg-blue-400 text-white rounded px-2'>{u.role}</p>}
           <p className='text-black font-semibold'>{u.userName}</p>
           <p>{u.email}</p>
           <div className='ml-auto inline-flex'>
-              <button className='bg-blue-500 hover:bg-blue-700 text-white px-2 rounded'>Editar</button>
+              <UpdateUser user={u} ></UpdateUser>
               <DeleteUser user={u} DeleteCallback={handleDeleteCallback}></DeleteUser>
           </div>
           

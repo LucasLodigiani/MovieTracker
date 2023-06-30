@@ -9,7 +9,7 @@ namespace MovieTrackerAPI.Services.Interfaces
         Task<(int, string)> Register(RegisterModel model, string role);
         Task<(int, string)> Login(LoginModel model);
 
-        Task<(int, string)> ModifyUser(UserDto userDto);
+        Task<(int, UserDto)> ModifyUser(UserDto userDto);
 
         Task<(int, string)> DeleteUser(string id);
 
