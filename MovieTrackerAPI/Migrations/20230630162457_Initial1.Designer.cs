@@ -11,7 +11,7 @@ using MovieTrackerAPI.Data;
 namespace MovieTrackerAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230627043057_Initial1")]
+    [Migration("20230630162457_Initial1")]
     partial class Initial1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -187,8 +187,15 @@ namespace MovieTrackerAPI.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Director")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("ImageUrl")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateOnly>("ReleaseDate")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")

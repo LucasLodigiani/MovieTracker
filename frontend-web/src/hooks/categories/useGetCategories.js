@@ -10,7 +10,7 @@ const useGetCategories = () => {
     const fetchData = async () => {
       setIsLoading(true);
       try{
-        const response = await fetch(base_url + '/api/Movies/GetAllCategories', {
+        const response = await fetch(base_url + '/api/Categories/GetAllCategories', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

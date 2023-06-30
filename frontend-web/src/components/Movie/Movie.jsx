@@ -10,14 +10,14 @@ import AddToFavorites from './AddToFavorites';
 
 const Movie = () => {
   const { id } = useParams();
-  const [ratePromedy, setRatePromedy] = useState(null);
+  const [ratePromedy, setRatePromedy] = useState(0);
   const [movie, isMovieLoading, isMovieLoadingError] = useGetMovie(id);
   const [reviews, isReviewsLoading, isReviewsError] = useGetReviews(id);
   const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     //Obtener el promedio de las puntuaciones
-    if (reviews !== null) {
+    if (reviews !== null && reviews.length !== 0) {
       const rateSum = reviews.reduce((a, r) => {
         return a + r.rate;
       }, 0);
@@ -30,7 +30,7 @@ const Movie = () => {
       {isMovieLoading && <p>Cargando....</p>}
       {movie && (
         <div className='container mx-auto px-4'>
-          <AddToFavorites id={id}></AddToFavorites>
+          
           <h1 className={`text-${theme === 'dark' ? 'white' : 'black'} font-extrabold text-2xl tracking-wide leading-none text-center`}>
             {movie.title}
           </h1>
@@ -41,6 +41,12 @@ const Movie = () => {
               className='mx-4 w-32 h-48 rounded-md'
             />
             <p className={`tracking-wide leading-loose ${theme === 'light' ? 'text-black' : 'text-white'} ps-8`}>
+              Director: {movie.director}
+            </p>
+            <p className={`tracking-wide leading-loose ${theme === 'light' ? 'text-black' : 'text-white'} ps-8`}>
+              Fecha de estreno: {movie.releaseDate}
+            </p>
+            <p className={`tracking-wide leading-loose ${theme === 'light' ? 'text-black' : 'text-white'} ps-8`}>
               {movie.description}
             </p>
           </div>
@@ -48,6 +54,7 @@ const Movie = () => {
           <p>Géneros: [{movie.categories.map((c) => c.name).join(', ')}]</p>
 
             {ratePromedy && <p>Puntuacion: {ratePromedy}</p>}
+            <AddToFavorites id={id}></AddToFavorites>
           </div>
         </div>
       )}

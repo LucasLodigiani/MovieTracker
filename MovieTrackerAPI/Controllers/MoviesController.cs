@@ -31,6 +31,8 @@ namespace MovieTrackerAPI.Controllers
                     Id = m.Id,
                     Title = m.Title,
                     Categories = m.Categories,
+                    Director = m.Director,
+                    ReleaseDate = m.ReleaseDate.ToString(),
                     ImageUrl = m.ImageUrl,
                     
                 })
@@ -50,6 +52,8 @@ namespace MovieTrackerAPI.Controllers
                     Id = m.Id,
                     Title = m.Title,
                     Categories = m.Categories,
+                    Director = m.Director,
+                    ReleaseDate = m.ReleaseDate.ToString(),
                     ImageUrl = m.ImageUrl
                 })
                 .ToListAsync();

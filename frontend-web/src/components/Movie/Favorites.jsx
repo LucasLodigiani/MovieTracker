@@ -31,8 +31,8 @@ const Favorites = () => {
         <p>No estás siguiendo ninguna película</p>
       ) : (
         favorites.map((favorite, index) => (
-          <Link to={"/movie/" + favorite.id}>
-            <Alert key={index} type={"warning"}>
+          <Link to={"/movie/" + favorite.id} key={index}>
+            <Alert type={"warning"}>
                 <img src={base_url + '/media/' + favorite.imageUrl} alt='movieImage' className='mx-4 w-12 h-15'/>
                 <p className='flex items-center text-black font-mono pr-48 text-lg'>{favorite.title}</p>
                 <div className='flex items-center'>

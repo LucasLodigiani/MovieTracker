@@ -14,6 +14,8 @@ const CreateMovie = () => {
     const [categories, setCategories] = useState("");
     const [image, setImage] = useState();
     const [preview, setPreview] = useState();
+    const [director, setDirector] = useState("");
+    const [releaseDate, setReleaseDate] = useState("");
 
       
       const handleTitleChange = (event) => {
@@ -40,6 +42,14 @@ const CreateMovie = () => {
 
       };
 
+      const handleDirectorChange = (event) => {
+        setDirector(event.target.value);
+      }
+
+      const handleReleaseDateChange = (event) => {
+        setReleaseDate(event.target.value);
+      }
+
       const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData();
@@ -57,6 +67,8 @@ const CreateMovie = () => {
         formData.append('Title', title);
         formData.append('Description', description);
         formData.append('Image', image);
+        formData.append('ReleaseDate', releaseDate);
+        formData.append('Director', director);
 
         //Agregar categorias
         categoryArray.forEach((category, index) => {
@@ -73,8 +85,15 @@ const CreateMovie = () => {
     <form className='text-blue-950' encType="multipart/form-data">
         <label>Titulo: </label>
         <input type='text' className='border border-slate-800 rounded-sm' onChange={handleTitleChange} value={title}></input>
+        <br></br>
         <label>Descripcion: </label>
         <input type='text' className='border border-slate-800 rounded-sm' onChange={handleDescriptionChange} value={description}></input>
+        <br></br>
+        <label>Director: </label>
+        <input type='text' className='border border-slate-800 rounded-sm' onChange={handleDirectorChange} value={director}></input>
+        <br></br>
+        <label>Fecha de estreno:: </label>
+        <input type='date' className='border border-slate-800 rounded-sm' onChange={handleReleaseDateChange} value={releaseDate}></input>
         <p className='text-gray-600 '>Categorias(en bd): 
             {isCategoriesLoading && <span>Cargando...</span>}
             {categoriesData !== null ? <span className='text-cyan-400'>{categoriesData.map((c) => c.name).join(', ')}</span> : null}

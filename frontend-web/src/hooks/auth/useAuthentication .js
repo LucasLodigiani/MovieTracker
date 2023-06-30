@@ -21,12 +21,16 @@ const useAuthentication = () => {
   };
 
   const isInRole = (role) => {
-    if(user.role === role){
-      return true;
+    if(isAuthenticated === true){
+      if(user.role === role){
+        return true;
+      }
+      else{
+        return false;
+      }
     }
-    else{
-      return false;
-    }
+    return false;
+    
   }
 
   const logout = () => {

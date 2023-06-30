@@ -43,6 +43,8 @@ namespace MovieTrackerAPI.Services.Implementations
                 {
                     Id = Guid.NewGuid(),
                     Title = movieDto.Title,
+                    Director = movieDto.Director,
+                    ReleaseDate = DateOnly.Parse(movieDto.ReleaseDate),
                     Description = movieDto.Description,
                     Categories = categories,
                     ImageUrl = mediaUrl,
@@ -107,6 +109,8 @@ namespace MovieTrackerAPI.Services.Implementations
                 Id = m.Id,
                 Title = m.Title,
                 Description = m.Description,
+                Director = m.Director,
+                ReleaseDate = m.ReleaseDate.ToString(),
                 ImageUrl = m.ImageUrl,
                 Categories = m.Categories,
             }).FirstOrDefaultAsync();
