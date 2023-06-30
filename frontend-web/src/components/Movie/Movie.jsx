@@ -26,35 +26,37 @@ const Movie = () => {
   }, [reviews]);
 
   return (
-    <div className={`bg-${theme === 'dark' ? 'gray' : 'white'}`} style={{ boxShadow: 'inset 0 0 5px rgba(0, 0, 0, 0.2)' }}>
+    <div className={` ${theme === 'dark' ? 'gray' : 'bg-rose-50'}`} style={{ boxShadow: 'inset 0 0 5px rgba(0, 0, 0, 0.2)' }}>
       {isMovieLoading && <p>Cargando....</p>}
       {movie && (
-        <div className='container mx-auto px-4'>
-          
-          <h1 className={`text-${theme === 'dark' ? 'white' : 'black'} font-extrabold text-2xl tracking-wide leading-none text-center`}>
+        <div className={`text- ${theme === 'dark' ? 'white' : 'bg-rose-50' }container mx-auto px-4`}>
+
+          <h1 className={`text-${theme === 'dark' ? 'white' : 'bg-rose-50'} font-extrabold text-2xl tracking-wide leading-none text-center py-5 `}>
             {movie.title}
           </h1>
-          <div className={`flex items-center float-right bg-${theme === 'dark' ? 'gray' : 'white'} rounded-md`}>
+          <div className={`flex items-center float-right ${theme === 'dark' ? 'gray' : ''} rounded-md`}>
             <img
               src={base_url + '/media/' + movie.imageUrl}
               alt='movie'
-              className='mx-4 w-32 h-48 rounded-md'
+              className='mx-32 w-48 h-60 rounded-md'
             />
-            <p className={`tracking-wide leading-loose ${theme === 'light' ? 'text-black' : 'text-white'} ps-8`}>
-              Director: {movie.director}
-            </p>
-            <p className={`tracking-wide leading-loose ${theme === 'light' ? 'text-black' : 'text-white'} ps-8`}>
-              Fecha de estreno: {movie.releaseDate}
-            </p>
-            <p className={`tracking-wide leading-loose ${theme === 'light' ? 'text-black' : 'text-white'} ps-8`}>
+
+            <p className={`tracking-wide leading-loose ${theme === 'light' ? 'text-black' : 'text-white'} w-4/6`}>
               {movie.description}
             </p>
           </div>
-          <div className={`${theme === 'light' ? 'text-black' : 'text-white'}`}>
-          <p>Géneros: [{movie.categories.map((c) => c.name).join(', ')}]</p>
+          <div className={`mx-32 ${theme === 'light' ? 'text-black' : 'text-white'}`}>
+            <AddToFavorites id={id}></AddToFavorites>
+            <p className={`tracking-wide leading-loose ${theme === 'light' ? 'text-black' : 'text-white'} `}>
+              Fecha de estreno: {movie.releaseDate}
+            </p>
+            <p className={`tracking-wide leading-loose ${theme === 'light' ? 'text-black' : 'text-white'} `}>
+              Director: {movie.director}
+            </p>
+
+            <p>Géneros: [{movie.categories.map((c) => c.name).join(', ')}]</p>
 
             {ratePromedy && <p>Puntuacion: {ratePromedy}</p>}
-            <AddToFavorites id={id}></AddToFavorites>
           </div>
         </div>
       )}
