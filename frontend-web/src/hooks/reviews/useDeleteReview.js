@@ -8,13 +8,13 @@ const useDeleteReview = () => {
     const deleteReview = async (id) => {
         setIsLoading(true);
         try {
-            const response = await fetch(base_url + "/api/Reviews/id/" + id, {
+            const response = await fetch(base_url + "/api/Reviews/id?reviewId=" + id, {
                 method: "DELETE",
             });
-            if (!response.ok) {
-                throw new Error("Ha ocurrido un problema al eliminar el comentario");
+            if (response.status !== 204) {
+                throw new Error("Ha ocurrido un problema al eliminar la reseña");
             }
-            const dataResult = await response.text();
+            const dataResult = "Reseña eliminada correctamente!";
 
             setData(dataResult);
             setIsLoading(false);

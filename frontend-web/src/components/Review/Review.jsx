@@ -2,11 +2,11 @@ import React, { useContext} from 'react';
 import { FaUserAstronaut } from 'react-icons/fa';
 import { BiSolidStar } from 'react-icons/bi';
 import { ThemeContext } from '../../contexts/ThemeContext';
+import DeleteReview from './DeleteReview';
 
-const Review = ({ userName, role, rate, title, content}) => {
+const Review = ({ id, userName, role, rate, title, content}) => {
   
   const { theme } = useContext(ThemeContext);
-
   return (
 
     <div
@@ -38,12 +38,14 @@ const Review = ({ userName, role, rate, title, content}) => {
               <BiSolidStar color='#fdd970' className='text-white' />
               <p className='mb-0 ml-1 text-white'>{rate}</p>
             </div>
+            <DeleteReview id={id}></DeleteReview>
           </div>
         </div>
       </div>
 
       <p className={` font-semibold ${theme === 'light' ? 'text-rose-950' : 'text-blue-800'}`}>{title}</p>
       <p className={`${theme === 'light' ? 'text-black' : 'text-gray-50'}`}>{content}</p>
+      
     </div>
   );
 };
