@@ -6,6 +6,7 @@ import useGetReviews from '../../hooks/reviews/useGetReviews';
 import ReviewsContainer from '../Review/ReviewsContainer';
 import CreateReview from '../Review/CreateReview';
 import { ThemeContext } from '../../contexts/ThemeContext';
+import AddToFavorites from './AddToFavorites';
 
 const Movie = () => {
   const { id } = useParams();
@@ -29,6 +30,7 @@ const Movie = () => {
       {isMovieLoading && <p>Cargando....</p>}
       {movie && (
         <div className='container mx-auto px-4'>
+          <AddToFavorites id={id}></AddToFavorites>
           <h1 className={`text-${theme === 'dark' ? 'white' : 'black'} font-extrabold text-2xl tracking-wide leading-none text-center`}>
             {movie.title}
           </h1>

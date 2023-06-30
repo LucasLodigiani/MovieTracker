@@ -10,8 +10,10 @@ import { FaUserAstronaut } from 'react-icons/fa';
 import Dropdown from '../Shared/Dropdown';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { CgDarkMode } from 'react-icons/cg';
+import { MdMovieFilter } from 'react-icons/md';
 import { BiLogOut } from 'react-icons/bi';
 import { ThemeContext } from '../../contexts/ThemeContext';
+import Favorites from '../Movie/Favorites';
 
 const Header = () => {
   const [userData, setUserData, isAuthenticated, isInRole, logout] = useAuthentication();
@@ -38,6 +40,11 @@ const Header = () => {
             <Modal icon={<BiMovie size={25} color="#235b8d" />} title="Create Movie">
               <CreateMovie />
             </Modal>
+          </span>
+          <span className={`${theme === 'light' ? 'hover:text-pink-700' : 'hover:text-cyan-300'} px-5 `}>
+          <Modal icon={<MdMovieFilter />} title="Favoritos" >
+            <Favorites></Favorites>
+          </Modal>
           </span>
         </div>
         <div className="flex items-center justify-between text-blue-gray-900"></div>

@@ -39,6 +39,24 @@ namespace MovieTrackerAPI.Controllers
             return Ok(movieDtos);
         }
 
+        [HttpPost("movies")]
+        public async Task<ActionResult<List<MovieDto>>> GetMoviesByIds([FromBody] IEnumerable<Guid> ids)
+        {
+            var movieDtos = await _context.Movies
+                .Where(m => ids.Contains(m.Id))
+                .Include(m => m.Categories)
+                .Select(m => new MovieDto
+                {
+                    Id = m.Id,
+                    Title = m.Title,
+                    Categories = m.Categories,
+                    ImageUrl = m.ImageUrl
+                })
+                .ToListAsync();
+
+            return Ok(movieDtos);
+        }
+
         [HttpGet("id")]
         public async Task<IActionResult> GetMovie(Guid Id)
         {
