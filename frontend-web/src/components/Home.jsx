@@ -17,7 +17,6 @@ const Main = () => {
       <MovieCarousel movies={actionMovies} title={"Acción:"}></MovieCarousel>
       <MovieCarousel movies={horrorMovies} title={"Terror:"}></MovieCarousel>
       <MovieCarousel movies={comedyMovies} title={"Comedia:"}></MovieCarousel>
-      <MovieCarousel movies={thillerMovies} title={"Thriller:"}></MovieCarousel>
       
     </div>
 
